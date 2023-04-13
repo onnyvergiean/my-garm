@@ -1,10 +1,29 @@
 package models
 
+import (
+	"my-garm/helpers"
+
+	"github.com/asaskevich/govalidator"
+	"gorm.io/gorm"
+)
+
 type User struct {
-	GormModel
-	Username string `gorm:"not null;uniqueIndex" json:"username" form:"username" valid:"required-Username is required"`
-	Email    string `gorm:"not null;uniqueIndex" json:"email" form:"email" valid:"required-Email is required,email-Email is invalid"`
-	Password string `gorm:"not null" json:"password" form:"password" valid:"required-Password is required,minstringlength(6)-Password must be at least 6 characters"`
-	Age 	int    `gorm:"not null" json:"age" form:"age" valid:"required-Age is required,min(8)-Age must be at least 8 years old"`
+	GormModel `json:"-"`
+	Username string `gorm:"not null;uniqueIndex" json:"username" form:"username" valid:"required~Username is required"`
+	Email    string `gorm:"not null;uniqueIndex" json:"email" form:"email" valid:"required~Email is required,email~Email is invalid"`
+	Password string `gorm:"not null" json:"-" form:"password" valid:"required~Password is required,minstringlength(6)~Password must be at least 6 characters"`
+	Age 	int    `gorm:"not null" json:"age" form:"age" valid:"required~Age is required,"`
 }
 
+func (u *User) BeforeCreate(tx *gorm.DB) (err error) {
+	_, errCreate := govalidator.ValidateStruct(u)
+
+	if errCreate != nil {
+		err = errCreate
+		return
+	}
+
+	u.Password = helpers.HashPassword(u.Password)
+	err = nil
+	return
+}
