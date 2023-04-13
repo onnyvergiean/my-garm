@@ -19,10 +19,9 @@ type MyClaims struct {
     jwt.StandardClaims
     Id 		 uint `json:"id"`
     Email    string `json:"Email"`
-	Role 	 string `json:"role"`
 }
 
-func GenerateToken(id uint, email string, role string) (string, error) {
+func GenerateToken(id uint, email string) (string, error) {
 
 	claims := MyClaims{
 		StandardClaims: jwt.StandardClaims{
@@ -31,7 +30,6 @@ func GenerateToken(id uint, email string, role string) (string, error) {
 		},
 		Id: id,
 		Email: email,
-		Role: role,
 	}
 	token := jwt.NewWithClaims(jwt.SigningMethodHS256, claims)
 
