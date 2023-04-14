@@ -4,7 +4,6 @@ import (
 	"my-garm/controllers"
 	"my-garm/middlewares"
 
-	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
 	swaggerFiles "github.com/swaggo/files"
 	ginSwagger "github.com/swaggo/gin-swagger"
@@ -29,15 +28,7 @@ import (
 func StartApp() *gin.Engine {
 	r := gin.Default()
 
-	// r.Use(cors.New(cors.Config{
-	// 		AllowOrigins:     []string{"https://my-garm-production-b7b2.up.railway.app"},
-	// 		AllowMethods:     []string{"PUT", "POST", "GET", "DELETE"},
-	// 		AllowHeaders:     []string{"Origin"},
-	// 		ExposeHeaders:    []string{"Content-Length"},
-	// 		AllowCredentials: true,
-	// 		MaxAge: 12 * time.Hour,
-	// 	}))
-	r.Use(cors.Default())
+	r.Use(middlewares.Cors)
 	r.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
 	userRouter := r.Group("/users")
 	{
