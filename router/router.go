@@ -3,7 +3,6 @@ package router
 import (
 	"my-garm/controllers"
 	"my-garm/middlewares"
-	"time"
 
 	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
@@ -31,15 +30,15 @@ func StartApp() *gin.Engine {
 	r := gin.Default()
 
 	r.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
-	r.Use(cors.New(cors.Config{
-		AllowOrigins:     []string{"https://my-garm-production-b7b2.up.railway.app/"},
-		AllowMethods:     []string{"PUT", "PATCH","POST", "GET", "DELETE"},
-		AllowHeaders:     []string{"Origin"},
-		ExposeHeaders:    []string{"Content-Length"},
-		AllowCredentials: true,
-		MaxAge: 12 * time.Hour,
-	}))
-
+	// r.Use(cors.New(cors.Config{
+	// 	AllowOrigins:     []string{"https://my-garm-production-b7b2.up.railway.app/"},
+	// 	AllowMethods:     []string{"PUT", "PATCH","POST", "GET", "DELETE"},
+	// 	AllowHeaders:     []string{"Origin"},
+	// 	ExposeHeaders:    []string{"Content-Length"},
+	// 	AllowCredentials: true,
+	// 	MaxAge: 12 * time.Hour,
+	// }))
+	r.Use(cors.Default())
 	userRouter := r.Group("/users")
 	{
 		userRouter.POST("/register", controllers.UserRegister)
