@@ -24,6 +24,7 @@ import (
 // @license.url http://www.apache.org/licenses/LICENSE-2.0.html
 // @version 1.0.0
 // @host https://my-garm-production-b7b2.up.railway.app/
+// @Access-Control-Allow-Origin: *
 // @BasePath /
 func StartApp() *gin.Engine {
 	r := gin.Default()
