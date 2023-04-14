@@ -3,6 +3,7 @@ package router
 import (
 	"my-garm/controllers"
 	"my-garm/middlewares"
+	"net/http"
 
 	"github.com/gin-gonic/gin"
 	swaggerFiles "github.com/swaggo/files"
@@ -28,7 +29,11 @@ import (
 func StartApp() *gin.Engine {
 	r := gin.Default()
 
-	
+	r.GET("/",func(ctx *gin.Context) {
+		ctx.JSON(http.StatusOK,gin.H{
+			"message":"Welcome to My-Garm",
+		})
+	})
 	r.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
 	userRouter := r.Group("/users")
 	{
