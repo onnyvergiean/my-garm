@@ -852,7 +852,7 @@ const docTemplate = `{
 // SwaggerInfo holds exported Swagger Info so clients can modify it
 var SwaggerInfo = &swag.Spec{
 	Version:          "1.0.0",
-	Host:             "my-garm-production-b7b2.up.railway.app",
+	Host:             "https://my-garm-production-b7b2.up.railway.app",
 	BasePath:         "/",
 	Schemes:          []string{},
 	Title:            "My-Garm API Documentation",

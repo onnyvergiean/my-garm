@@ -105,7 +105,7 @@ definitions:
       username:
         type: string
     type: object
-host: my-garm-production-b7b2.up.railway.app
+host: https://my-garm-production-b7b2.up.railway.app
 info:
   contact:
     name: API Support
