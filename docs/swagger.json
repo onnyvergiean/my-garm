@@ -14,7 +14,7 @@
         },
         "version": "1.0.0"
     },
-    "host": "https://my-garm-production-b7b2.up.railway.app/",
+    "host": "https://my-garm-production-b7b2.up.railway.app",
     "basePath": "/",
     "paths": {
         "/comments/{photoId}": {
