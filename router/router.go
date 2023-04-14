@@ -21,7 +21,6 @@ import (
 // @version 1.0.0
 // @host my-garm-production-b7b2.up.railway.app
 // @BasePath /
-
 // @in header
 // @name Authorization
 // @description Type "Bearer" eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2ODE0ODA2MDUsImlzcyI6Ik1ZLUdBUk0iLCJpZCI6NCwiRW1haWwiOiJva0Bvay5jb20ifQ.bPcX66MlkvCWypEXpLEadFToWYDoe8w3iq9YXp_JlHs
