@@ -20,6 +20,7 @@ import (
 // @version 1.0.0
 // @host my-garm-production-b7b2.up.railway.app
 // @BasePath /
+
 // @securityDefinitions.apikey Bearer
 // @in header
 // @name Authorization
