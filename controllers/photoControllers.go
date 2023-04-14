@@ -18,7 +18,6 @@ func CreatePhoto(c *gin.Context) {
 	db := database.GetDB()
 	userData := c.MustGet("userData").(jwt.MapClaims)
 	contentType := helpers.GetContentType(c)
-	_, _ = db, contentType
 
 	Photo := models.Photo{}
 	userID := userData["id"].(float64)
@@ -88,7 +87,6 @@ func GetPhotos(c *gin.Context) {
 func UpdatePhoto(c *gin.Context){
 	db := database.GetDB()
 	contentType := helpers.GetContentType(c)
-	_, _ = db, contentType
 
 	Photo := models.Photo{}
 	photoId,_ := strconv.Atoi(c.Param("photoId"))

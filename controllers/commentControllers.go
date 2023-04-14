@@ -17,7 +17,6 @@ func CreateComment(c *gin.Context) {
 	db := database.GetDB()
 	userData := c.MustGet("userData").(jwt.MapClaims)
 	contentType := helpers.GetContentType(c)
-	_, _ = db, contentType
 
 	Comment := models.Comment{}
 	userID := userData["id"].(float64)
@@ -86,13 +85,17 @@ func GetComment(c *gin.Context) {
 		return
 	}
 
-	err = db.Preload("User").Preload("Photo").Where("photo_id = ?", photoId).First(&Comment, "id= ?",commentId).Error
+	err = db.Preload("User").Preload("Photo").Preload("Photo.User").Where("photo_id = ?", photoId).First(&Comment, "id= ?",commentId).Error
 	
+
 	if err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "Bad Request", "message": err.Error()})
 		return
 	}
 
+	
+
+	
 	c.JSON(http.StatusOK, Comment)
 }
 
@@ -101,11 +104,12 @@ func GetComments(c *gin.Context) {
 	db := database.GetDB()
 	Comments := []models.Comment{}
 	photoId, err  := strconv.Atoi(c.Param("photoId"))
+	
 	if err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "Bad Request", "message": err.Error()})
 		return
 	}
-	err = db.Preload("User").Preload("Photo").Where("photo_id = ?", photoId).Find(&Comments).Error
+	err = db.Preload("User").Preload("Photo").Preload("Photo.User").Where("photo_id = ?", photoId).Find(&Comments).Error
 	
 	if err != nil {
 		if errors.Is(err, gorm.ErrRecordNotFound) {
@@ -121,7 +125,6 @@ func GetComments(c *gin.Context) {
 func UpdateComment(c *gin.Context) {
 	db := database.GetDB()
 	contentType := helpers.GetContentType(c)
-	_, _ = db, contentType
 
 	commentId,_ := strconv.Atoi(c.Param("commentId"))
 	Comment := models.Comment{}
