@@ -23,6 +23,7 @@ import (
 // @Param photoId path int true "photo id"
 // @Param CommentCreate body models.CommentCreate true "create comment"
 // @Success 200 {object} models.Comment
+// @Failure 400 {object} string "Bad Request"
 // @Router /comments/{photoId} [post]
 func CreateComment(c *gin.Context) {
 	db := database.GetDB()
@@ -89,6 +90,7 @@ func CreateComment(c *gin.Context) {
 // @Param photoId path int true "photo id"
 // @Param commentId path int true "comment id"
 // @Success 200 {object} models.Comment
+// @Failure 400 {object} string "Bad Request"
 // @Router /comments/{photoId}/{commentId} [get]
 func GetComment(c *gin.Context) {
 	db := database.GetDB()
@@ -119,7 +121,8 @@ func GetComment(c *gin.Context) {
 // @Accept  json
 // @Produce  json
 // @Param photoId path int true "photo id"
-// @Success 200 {object} models.Comment
+// @Success 200 {object} []models.Comment
+// @Failure 400 {object} string "Bad Request"
 // @Router /comments/{photoId} [get]
 func GetComments(c *gin.Context) {
 	db := database.GetDB()
@@ -153,6 +156,7 @@ func GetComments(c *gin.Context) {
 // @Param commentId path int true "comment id"
 // @Param CommentUpdate body models.CommentCreate true "update comment"
 // @Success 200 {object} models.Comment
+// @Failure 400 {object} string "Bad Request"
 // @Router /comments/{photoId}/{commentId} [put]
 func UpdateComment(c *gin.Context) {
 	db := database.GetDB()
@@ -215,7 +219,8 @@ func UpdateComment(c *gin.Context) {
 // @Produce  json
 // @Param photoId path int true "photo id"
 // @Param commentId path int true "comment id"
-// @Success 200 {object} models.Comment
+// @Success 200 {message} string "Comment deleted successfully"
+// @Failure 400 {object} string "Bad Request"
 // @Router /comments/{photoId}/{commentId} [delete]
 func DeleteComment(c *gin.Context) {
 	db := database.GetDB()

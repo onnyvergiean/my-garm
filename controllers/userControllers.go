@@ -21,6 +21,7 @@ var appJSON = "application/json"
 // @Produce  json
 // @Param UserRegister body models.UserRegister true "UserRegister"
 // @Success 200 {object} models.User
+// @Failure 400 {object} string "Bad Request"
 // @Router /users/register [post]
 func UserRegister(c *gin.Context){
 	db := database.GetDB()
@@ -55,6 +56,7 @@ func UserRegister(c *gin.Context){
 // @Produce json
 // @Param UserLogin body models.UserLogin true "email"
 // @Success 200 {object} string "token"
+// @Failure 400 {object} string "Bad Request"
 // @Router /users/login [post]
 func UserLogin(c *gin.Context){
 	db := database.GetDB()

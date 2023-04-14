@@ -135,7 +135,13 @@ paths:
         "200":
           description: OK
           schema:
-            $ref: '#/definitions/models.Comment'
+            items:
+              $ref: '#/definitions/models.Comment'
+            type: array
+        "400":
+          description: Bad Request
+          schema:
+            type: string
       security:
       - Bearer: []
       summary: Get Comments
@@ -164,6 +170,10 @@ paths:
           description: OK
           schema:
             $ref: '#/definitions/models.Comment'
+        "400":
+          description: Bad Request
+          schema:
+            type: string
       security:
       - Bearer: []
       summary: Create Comment
@@ -189,9 +199,13 @@ paths:
       - application/json
       responses:
         "200":
-          description: OK
+          description: Comment deleted successfully
           schema:
-            $ref: '#/definitions/models.Comment'
+            type: message
+        "400":
+          description: Bad Request
+          schema:
+            type: string
       security:
       - Bearer: []
       summary: Delete Comment
@@ -219,6 +233,10 @@ paths:
           description: OK
           schema:
             $ref: '#/definitions/models.Comment'
+        "400":
+          description: Bad Request
+          schema:
+            type: string
       security:
       - Bearer: []
       summary: Get Comment
@@ -252,6 +270,10 @@ paths:
           description: OK
           schema:
             $ref: '#/definitions/models.Comment'
+        "400":
+          description: Bad Request
+          schema:
+            type: string
       security:
       - Bearer: []
       summary: Update Comment
@@ -268,7 +290,13 @@ paths:
         "200":
           description: OK
           schema:
-            $ref: '#/definitions/models.Photo'
+            items:
+              $ref: '#/definitions/models.Photo'
+            type: array
+        "400":
+          description: Bad Request
+          schema:
+            type: string
       security:
       - Bearer: []
       summary: Get Photos
@@ -292,6 +320,10 @@ paths:
           description: OK
           schema:
             $ref: '#/definitions/models.Photo'
+        "400":
+          description: Bad Request
+          schema:
+            type: string
       security:
       - Bearer: []
       summary: Create Photo
@@ -312,9 +344,13 @@ paths:
       - application/json
       responses:
         "200":
-          description: OK
+          description: Photo deleted
           schema:
-            $ref: '#/definitions/models.Photo'
+            type: string
+        "400":
+          description: Bad Request
+          schema:
+            type: string
       security:
       - Bearer: []
       summary: Delete Photo
@@ -337,6 +373,10 @@ paths:
           description: OK
           schema:
             $ref: '#/definitions/models.Photo'
+        "400":
+          description: Bad Request
+          schema:
+            type: string
       security:
       - Bearer: []
       summary: Get Photo
@@ -365,6 +405,10 @@ paths:
           description: OK
           schema:
             $ref: '#/definitions/models.Photo'
+        "400":
+          description: Bad Request
+          schema:
+            type: string
       security:
       - Bearer: []
       summary: Update Photo
@@ -381,7 +425,13 @@ paths:
         "200":
           description: OK
           schema:
-            $ref: '#/definitions/models.SocialMedia'
+            items:
+              $ref: '#/definitions/models.SocialMedia'
+            type: array
+        "400":
+          description: Bad Request
+          schema:
+            type: string
       security:
       - Bearer: []
       summary: Get Social Medias
@@ -405,6 +455,10 @@ paths:
           description: OK
           schema:
             $ref: '#/definitions/models.SocialMedia'
+        "400":
+          description: Bad Request
+          schema:
+            type: string
       security:
       - Bearer: []
       summary: Create Social Media
@@ -425,9 +479,13 @@ paths:
       - application/json
       responses:
         "200":
-          description: OK
+          description: Social Media Deleted
           schema:
-            $ref: '#/definitions/models.SocialMedia'
+            type: string
+        "400":
+          description: Bad Request
+          schema:
+            type: string
       security:
       - Bearer: []
       summary: Delete Social Media
@@ -450,6 +508,10 @@ paths:
           description: OK
           schema:
             $ref: '#/definitions/models.SocialMedia'
+        "400":
+          description: Bad Request
+          schema:
+            type: string
       security:
       - Bearer: []
       summary: Get Social Media
@@ -478,6 +540,10 @@ paths:
           description: OK
           schema:
             $ref: '#/definitions/models.SocialMedia'
+        "400":
+          description: Bad Request
+          schema:
+            type: string
       security:
       - Bearer: []
       summary: Update Social Media
@@ -503,6 +569,10 @@ paths:
           description: token
           schema:
             type: string
+        "400":
+          description: Bad Request
+          schema:
+            type: string
       summary: Login user
       tags:
       - User
@@ -526,6 +596,10 @@ paths:
           description: OK
           schema:
             $ref: '#/definitions/models.User'
+        "400":
+          description: Bad Request
+          schema:
+            type: string
       summary: Register new user
       tags:
       - User

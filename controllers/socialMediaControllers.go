@@ -22,6 +22,7 @@ import (
 // @Produce  json
 // @Param SocialMediaCreate body models.SocialMediaCreate true "create social media"
 // @Success 200 {object} models.SocialMedia
+// @Failure 400 {object} string "Bad Request"
 // @Router /social-media [post]
 func CreateSocialMedia(c *gin.Context){
 	db := database.GetDB()
@@ -68,6 +69,7 @@ func CreateSocialMedia(c *gin.Context){
 // @Produce  json
 // @Param socialMediaId path int true "Social Media Id"
 // @Success 200 {object} models.SocialMedia
+// @Failure 400 {object} string "Bad Request"
 // @Router /social-media/{socialMediaId} [get]
 func GetSocialMedia(c *gin.Context){
 	db := database.GetDB()
@@ -93,7 +95,8 @@ func GetSocialMedia(c *gin.Context){
 // @Tags Social Media
 // @Accept  json
 // @Produce  json
-// @Success 200 {object} models.SocialMedia
+// @Success 200 {object} []models.SocialMedia
+// @Failure 400 {object} string "Bad Request"
 // @Router /social-media [get]
 func GetSocialMedias(c *gin.Context){
 	db := database.GetDB()
@@ -119,6 +122,7 @@ func GetSocialMedias(c *gin.Context){
 // @Param socialMediaId path int true "Social Media Id"
 // @Param SocialMedia body models.SocialMediaCreate true "update social media"
 // @Success 200 {object} models.SocialMedia
+// @Failure 400 {object} string "Bad Request"
 // @Router /social-media/{socialMediaId} [put]
 func UpdateSocialMedia(c *gin.Context){
 	db := database.GetDB()
@@ -156,7 +160,8 @@ func UpdateSocialMedia(c *gin.Context){
 // @Accept  json
 // @Produce  json
 // @Param socialMediaId path int true "Social Media Id"
-// @Success 200 {object} models.SocialMedia
+// @Success 200 {object} string "Social Media Deleted"
+// @Failure 400 {object} string "Bad Request"
 // @Router /social-media/{socialMediaId} [delete]
 func DeleteSocialMedia(c *gin.Context){
 	db := database.GetDB()

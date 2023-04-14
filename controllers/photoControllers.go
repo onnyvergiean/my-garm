@@ -22,6 +22,7 @@ import (
 // @Produce  json
 // @Param PhotoCreate body models.PhotoCreate true "create photo"
 // @Success 200 {object} models.Photo
+// @Failure 400 {object} string "Bad Request"
 // @Router /photos [post]
 func CreatePhoto(c *gin.Context) {
 	db := database.GetDB()
@@ -67,6 +68,7 @@ func CreatePhoto(c *gin.Context) {
 // @Produce  json
 // @Param photoId path int true "Photo ID"
 // @Success 200 {object} models.Photo
+// @Failure 400 {object} string "Bad Request"
 // @Router /photos/{photoId} [get]
 func GetPhoto(c *gin.Context) {
 	db := database.GetDB()
@@ -92,7 +94,8 @@ func GetPhoto(c *gin.Context) {
 // @Tags Photo
 // @Accept  json
 // @Produce  json
-// @Success 200 {object} models.Photo
+// @Success 200 {object} []models.Photo
+// @Failure 400 {object} string "Bad Request"
 // @Router /photos [get]
 func GetPhotos(c *gin.Context) {
 	db := database.GetDB()
@@ -120,6 +123,7 @@ func GetPhotos(c *gin.Context) {
 // @Param photoId path int true "Photo ID"
 // @Param PhotoUpdate body models.PhotoCreate true "update photo"
 // @Success 200 {object} models.Photo
+// @Failure 400 {object} string "Bad Request"
 // @Router /photos/{photoId} [put]
 func UpdatePhoto(c *gin.Context){
 	db := database.GetDB()
@@ -159,7 +163,8 @@ func UpdatePhoto(c *gin.Context){
 // @Accept  json
 // @Produce  json
 // @Param photoId path int true "Photo ID"
-// @Success 200 {object} models.Photo
+// @Success 200 {object} string "Photo deleted"
+// @Failure 400 {object} string "Bad Request"
 // @Router /photos/{photoId} [delete]
 func DeletePhoto(c *gin.Context){
 	db := database.GetDB()
