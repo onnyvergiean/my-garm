@@ -28,7 +28,7 @@ import (
 func StartApp() *gin.Engine {
 	r := gin.Default()
 
-	r.Use(middlewares.Cors)
+	
 	r.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
 	userRouter := r.Group("/users")
 	{
