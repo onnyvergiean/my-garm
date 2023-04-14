@@ -1,3 +1,4 @@
+basePath: /
 definitions:
   models.Comment:
     properties:
@@ -104,9 +105,18 @@ definitions:
       username:
         type: string
     type: object
+host: my-garm-production-b7b2.up.railway.app
 info:
-  contact: {}
+  contact:
+    name: API Support
+    url: http://www.swagger.io/support
+  description: This is a sample server for a photo sharing app.
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  termsOfService: http://swagger.io/terms/
   title: My-Garm API Documentation
+  version: 1.0.0
 paths:
   /comments/{photoId}:
     get:
