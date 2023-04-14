@@ -14,7 +14,7 @@
         },
         "version": "1.0.0"
     },
-    "host": "localhost:8080",
+    "host": "https://my-garm-production-b7b2.up.railway.app/",
     "basePath": "/",
     "paths": {
         "/comments/{photoId}": {
