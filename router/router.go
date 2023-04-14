@@ -14,7 +14,6 @@ import (
 // @in header
 // @name Authorization
 // @description Type "Bearer" eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2ODE0ODA2MDUsImlzcyI6Ik1ZLUdBUk0iLCJpZCI6NCwiRW1haWwiOiJva0Bvay5jb20ifQ.bPcX66MlkvCWypEXpLEadFToWYDoe8w3iq9YXp_JlHs
-
 // @description This is a sample server for a photo sharing app.
 // @termsOfService http://swagger.io/terms/
 // @contact.name API Support
@@ -23,8 +22,8 @@ import (
 // @license.name Apache 2.0
 // @license.url http://www.apache.org/licenses/LICENSE-2.0.html
 // @version 1.0.0
-// @host https://my-garm-production-b7b2.up.railway.app
-// @BasePath /
+// @host my-garm-production-b7b2.up.railway.app
+
 func StartApp() *gin.Engine {
 	r := gin.Default()
 

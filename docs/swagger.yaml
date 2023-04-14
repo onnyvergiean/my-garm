@@ -1,4 +1,3 @@
-basePath: /
 definitions:
   models.Comment:
     properties:
@@ -105,18 +104,9 @@ definitions:
       username:
         type: string
     type: object
-host: https://my-garm-production-b7b2.up.railway.app
 info:
-  contact:
-    name: API Support
-    url: http://www.swagger.io/support
-  description: This is a sample server for a photo sharing app.
-  license:
-    name: Apache 2.0
-    url: http://www.apache.org/licenses/LICENSE-2.0.html
-  termsOfService: http://swagger.io/terms/
+  contact: {}
   title: My-Garm API Documentation
-  version: 1.0.0
 paths:
   /comments/{photoId}:
     get:
@@ -531,7 +521,7 @@ paths:
       - User
 securityDefinitions:
   Bearer:
-    description: Type "Bearer" eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2ODE0ODA2MDUsImlzcyI6Ik1ZLUdBUk0iLCJpZCI6NCwiRW1haWwiOiJva0Bvay5jb20ifQ.bPcX66MlkvCWypEXpLEadFToWYDoe8w3iq9YXp_JlHs
+    description: This is a sample server for a photo sharing app.
     in: header
     name: Authorization
     type: apiKey

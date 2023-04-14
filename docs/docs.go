@@ -10,15 +10,7 @@ const docTemplate = `{
     "info": {
         "description": "{{escape .Description}}",
         "title": "{{.Title}}",
-        "termsOfService": "http://swagger.io/terms/",
-        "contact": {
-            "name": "API Support",
-            "url": "http://www.swagger.io/support"
-        },
-        "license": {
-            "name": "Apache 2.0",
-            "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
-        },
+        "contact": {},
         "version": "{{.Version}}"
     },
     "host": "{{.Host}}",
@@ -841,7 +833,7 @@ const docTemplate = `{
     },
     "securityDefinitions": {
         "Bearer": {
-            "description": "Type \"Bearer\" eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2ODE0ODA2MDUsImlzcyI6Ik1ZLUdBUk0iLCJpZCI6NCwiRW1haWwiOiJva0Bvay5jb20ifQ.bPcX66MlkvCWypEXpLEadFToWYDoe8w3iq9YXp_JlHs",
+            "description": "This is a sample server for a photo sharing app.",
             "type": "apiKey",
             "name": "Authorization",
             "in": "header"
@@ -851,12 +843,12 @@ const docTemplate = `{
 
 // SwaggerInfo holds exported Swagger Info so clients can modify it
 var SwaggerInfo = &swag.Spec{
-	Version:          "1.0.0",
-	Host:             "https://my-garm-production-b7b2.up.railway.app",
-	BasePath:         "/",
+	Version:          "",
+	Host:             "",
+	BasePath:         "",
 	Schemes:          []string{},
 	Title:            "My-Garm API Documentation",
-	Description:      "This is a sample server for a photo sharing app.",
+	Description:      "",
 	InfoInstanceName: "swagger",
 	SwaggerTemplate:  docTemplate,
 }
