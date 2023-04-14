@@ -56,13 +56,42 @@ func CommentAuthorization() gin.HandlerFunc {
 		
 		err = db.Select("user_id").First(&Comment, uint(commentId)).Error
 		
-
 		if err != nil {
 			c.AbortWithStatusJSON(http.StatusNotFound, gin.H{"error": "Not Found", "message": "Comment not found"})
 			return
 		}
 		
 		if Comment.UserID != userID {
+				c.AbortWithStatusJSON(http.StatusForbidden, gin.H{"error": "Forbidden", "message": "You are not authorized to access this data"})
+				return	
+		}
+
+		c.Next()
+	}
+}
+
+
+func SocialMediaAuthorization() gin.HandlerFunc {
+	return func(c *gin.Context) {
+		db := database.GetDB()
+		socialMediaId, err := strconv.Atoi(c.Param("socialMediaId"))
+		if err != nil {
+			c.AbortWithStatusJSON(http.StatusBadRequest, gin.H{"error": "Bad Request", "message":"Invalid Parameter"})
+			return
+		}
+
+		userData := c.MustGet("userData").(jwt.MapClaims)
+		userID := uint(userData["id"].(float64))
+		SocialMedia := models.SocialMedia{}
+		
+		err = db.Select("user_id").First(&SocialMedia, uint(socialMediaId)).Error
+		
+		if err != nil {
+			c.AbortWithStatusJSON(http.StatusNotFound, gin.H{"error": "Not Found", "message": "Social Media not found"})
+			return
+		}
+		
+		if SocialMedia.UserID != userID {
 				c.AbortWithStatusJSON(http.StatusForbidden, gin.H{"error": "Forbidden", "message": "You are not authorized to access this data"})
 				return	
 		}
