@@ -1,6 +1,7 @@
 package models
 
 import (
+	"errors"
 	"my-garm/helpers"
 
 	"github.com/asaskevich/govalidator"
@@ -18,9 +19,14 @@ type User struct {
 func (u *User) BeforeCreate(tx *gorm.DB) (err error) {
 	_, errCreate := govalidator.ValidateStruct(u)
 
-	if errCreate != nil {
+	if errCreate != nil  {
 		err = errCreate
 		return
+	}
+
+	if u.Age <=8 {
+		err  = errors.New("age must be greater than 8 years old")
+		return 
 	}
 
 	u.Password = helpers.HashPassword(u.Password)
