@@ -13,6 +13,7 @@ import (
 	"gorm.io/gorm"
 )
 
+
 func CreateComment(c *gin.Context) {
 	db := database.GetDB()
 	userData := c.MustGet("userData").(jwt.MapClaims)
@@ -68,16 +69,11 @@ func CreateComment(c *gin.Context) {
 }
 
 
+
 func GetComment(c *gin.Context) {
 	db := database.GetDB()
 	Comment := models.Comment{}
-	commentId,err  := strconv.Atoi(c.Param("commentId"))
-
-	if err != nil {
-		c.JSON(http.StatusBadRequest, gin.H{"error": "Bad Request", "message": err.Error()})
-		return
-	}
-
+	commentId,_  := strconv.Atoi(c.Param("commentId"))
 	photoId, err  := strconv.Atoi(c.Param("photoId"))
 
 	if err != nil {
@@ -92,10 +88,6 @@ func GetComment(c *gin.Context) {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "Bad Request", "message": err.Error()})
 		return
 	}
-
-	
-
-	
 	c.JSON(http.StatusOK, Comment)
 }
 
@@ -125,10 +117,26 @@ func GetComments(c *gin.Context) {
 func UpdateComment(c *gin.Context) {
 	db := database.GetDB()
 	contentType := helpers.GetContentType(c)
-
 	commentId,_ := strconv.Atoi(c.Param("commentId"))
+	photoId,err := strconv.Atoi(c.Param("photoId"))
 	Comment := models.Comment{}
+	Photo := models.Photo{}
 
+	if err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": "Bad Request", "message": err.Error()})
+		return
+	}
+
+	err = db.Where("id = ?", photoId).Take(&Photo).Error
+
+	if err != nil {
+		if errors.Is(err, gorm.ErrRecordNotFound) {
+			c.JSON(http.StatusNotFound, gin.H{"error": "Not Found", "message": err.Error()})
+			return
+		}
+		c.JSON(http.StatusBadRequest, gin.H{"error": "Bad Request", "message": err.Error()})
+		return		 
+	}
 
 	if contentType == appJSON {
 		c.BindJSON(&Comment)
@@ -138,13 +146,17 @@ func UpdateComment(c *gin.Context) {
 
 	Comment.ID = uint(commentId)
 
-	err := db.Model(&Comment).Where("id = ?", commentId).Updates(models.Comment{
+	err = db.Model(&Comment).Where("id = ?", commentId).Updates(models.Comment{
 		Message: Comment.Message,
 	}).Error
 
 	if err != nil {
+		if errors.Is(err, gorm.ErrRecordNotFound) {
+			c.JSON(http.StatusNotFound, gin.H{"error": "Not Found", "message": err.Error()})
+			return
+		}
 		c.JSON(http.StatusBadRequest, gin.H{"error": "Bad Request", "message": err.Error()})
-		return
+		return		 
 	}
 
 	c.JSON(http.StatusOK, gin.H{
@@ -159,11 +171,34 @@ func DeleteComment(c *gin.Context) {
 	commentId,_ := strconv.Atoi(c.Param("commentId"))
 	Comment := models.Comment{}
 
-	err := db.Where("id = ?", commentId).Delete(&Comment).Error
+	photoId,err := strconv.Atoi(c.Param("photoId"))
+	Photo := models.Photo{}
 
 	if err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "Bad Request", "message": err.Error()})
 		return
+	}
+
+	err = db.Where("id = ?", photoId).Take(&Photo).Error
+
+	if err != nil {
+		if errors.Is(err, gorm.ErrRecordNotFound) {
+			c.JSON(http.StatusNotFound, gin.H{"error": "Not Found", "message": err.Error()})
+			return
+		}
+		c.JSON(http.StatusBadRequest, gin.H{"error": "Bad Request", "message": err.Error()})
+		return
+	}
+
+	err = db.Where("id = ? ", commentId).Delete(&Comment).Error
+
+	if err != nil {
+		if errors.Is(err, gorm.ErrRecordNotFound) {
+			c.JSON(http.StatusNotFound, gin.H{"error": "Not Found", "message": err.Error()})
+			return
+		}
+		c.JSON(http.StatusBadRequest, gin.H{"error": "Bad Request", "message": err.Error()})
+		return		 
 	}
 
 	c.JSON(http.StatusOK, gin.H{"message": "Comment deleted successfully"})
