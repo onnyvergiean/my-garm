@@ -23,7 +23,7 @@ import (
 // @license.name Apache 2.0
 // @license.url http://www.apache.org/licenses/LICENSE-2.0.html
 // @version 1.0.0
-// @host https://my-garm-production-b7b2.up.railway.app
+// @host http://my-garm-production-b7b2.up.railway.app
 // @BasePath /
 func StartApp() *gin.Engine {
 	r := gin.Default()
