@@ -10,6 +10,11 @@ import (
 )
 
 // @title My-Garm API Documentation
+// @securityDefinitions.apikey Bearer
+// @in header
+// @name Authorization
+// @description Type "Bearer" eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2ODE0ODA2MDUsImlzcyI6Ik1ZLUdBUk0iLCJpZCI6NCwiRW1haWwiOiJva0Bvay5jb20ifQ.bPcX66MlkvCWypEXpLEadFToWYDoe8w3iq9YXp_JlHs
+
 // @description This is a sample server for a photo sharing app.
 // @termsOfService http://swagger.io/terms/
 // @contact.name API Support

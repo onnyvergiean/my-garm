@@ -26,6 +26,11 @@ const docTemplate = `{
     "paths": {
         "/comments/{photoId}": {
             "get": {
+                "security": [
+                    {
+                        "Bearer": []
+                    }
+                ],
                 "description": "Get Details of Comments by corresponding Photo ID",
                 "consumes": [
                     "application/json"
@@ -56,6 +61,11 @@ const docTemplate = `{
                 }
             },
             "post": {
+                "security": [
+                    {
+                        "Bearer": []
+                    }
+                ],
                 "description": "Create New Comment Based on Photo ID",
                 "consumes": [
                     "application/json"
@@ -77,11 +87,11 @@ const docTemplate = `{
                     },
                     {
                         "description": "create comment",
-                        "name": "models.Comment",
+                        "name": "CommentCreate",
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/models.Comment"
+                            "$ref": "#/definitions/models.CommentCreate"
                         }
                     }
                 ],
@@ -97,6 +107,11 @@ const docTemplate = `{
         },
         "/comments/{photoId}/{commentId}": {
             "get": {
+                "security": [
+                    {
+                        "Bearer": []
+                    }
+                ],
                 "description": "Get Details of Comment by corresponding ID",
                 "consumes": [
                     "application/json"
@@ -134,6 +149,11 @@ const docTemplate = `{
                 }
             },
             "put": {
+                "security": [
+                    {
+                        "Bearer": []
+                    }
+                ],
                 "description": "Update Comment by corresponding ID",
                 "consumes": [
                     "application/json"
@@ -159,6 +179,15 @@ const docTemplate = `{
                         "name": "commentId",
                         "in": "path",
                         "required": true
+                    },
+                    {
+                        "description": "update comment",
+                        "name": "CommentUpdate",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/models.CommentCreate"
+                        }
                     }
                 ],
                 "responses": {
@@ -171,6 +200,11 @@ const docTemplate = `{
                 }
             },
             "delete": {
+                "security": [
+                    {
+                        "Bearer": []
+                    }
+                ],
                 "description": "Delete Comment by corresponding ID",
                 "consumes": [
                     "application/json"
@@ -210,6 +244,11 @@ const docTemplate = `{
         },
         "/photos": {
             "get": {
+                "security": [
+                    {
+                        "Bearer": []
+                    }
+                ],
                 "description": "Get Details of All Photos",
                 "consumes": [
                     "application/json"
@@ -231,6 +270,11 @@ const docTemplate = `{
                 }
             },
             "post": {
+                "security": [
+                    {
+                        "Bearer": []
+                    }
+                ],
                 "description": "Create New Photo",
                 "consumes": [
                     "application/json"
@@ -245,11 +289,11 @@ const docTemplate = `{
                 "parameters": [
                     {
                         "description": "create photo",
-                        "name": "models.Photo",
+                        "name": "PhotoCreate",
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/models.Photo"
+                            "$ref": "#/definitions/models.PhotoCreate"
                         }
                     }
                 ],
@@ -265,6 +309,11 @@ const docTemplate = `{
         },
         "/photos/{photoId}": {
             "get": {
+                "security": [
+                    {
+                        "Bearer": []
+                    }
+                ],
                 "description": "Get Details of Photo by corresponding ID",
                 "consumes": [
                     "application/json"
@@ -295,6 +344,11 @@ const docTemplate = `{
                 }
             },
             "put": {
+                "security": [
+                    {
+                        "Bearer": []
+                    }
+                ],
                 "description": "Update Details of Photo by corresponding ID",
                 "consumes": [
                     "application/json"
@@ -313,6 +367,15 @@ const docTemplate = `{
                         "name": "photoId",
                         "in": "path",
                         "required": true
+                    },
+                    {
+                        "description": "update photo",
+                        "name": "PhotoUpdate",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/models.PhotoCreate"
+                        }
                     }
                 ],
                 "responses": {
@@ -325,6 +388,11 @@ const docTemplate = `{
                 }
             },
             "delete": {
+                "security": [
+                    {
+                        "Bearer": []
+                    }
+                ],
                 "description": "Delete Photo by corresponding ID",
                 "consumes": [
                     "application/json"
@@ -357,6 +425,11 @@ const docTemplate = `{
         },
         "/social-media": {
             "get": {
+                "security": [
+                    {
+                        "Bearer": []
+                    }
+                ],
                 "description": "Get Details of all Social Medias",
                 "consumes": [
                     "application/json"
@@ -378,6 +451,11 @@ const docTemplate = `{
                 }
             },
             "post": {
+                "security": [
+                    {
+                        "Bearer": []
+                    }
+                ],
                 "description": "Create New Social Media",
                 "consumes": [
                     "application/json"
@@ -392,11 +470,11 @@ const docTemplate = `{
                 "parameters": [
                     {
                         "description": "create social media",
-                        "name": "models.SocialMedia",
+                        "name": "SocialMediaCreate",
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/models.SocialMedia"
+                            "$ref": "#/definitions/models.SocialMediaCreate"
                         }
                     }
                 ],
@@ -412,6 +490,11 @@ const docTemplate = `{
         },
         "/social-media/{socialMediaId}": {
             "get": {
+                "security": [
+                    {
+                        "Bearer": []
+                    }
+                ],
                 "description": "Get Details of Social Media corresponding to socialMediaId",
                 "consumes": [
                     "application/json"
@@ -442,6 +525,11 @@ const docTemplate = `{
                 }
             },
             "put": {
+                "security": [
+                    {
+                        "Bearer": []
+                    }
+                ],
                 "description": "Update Details of Social Media corresponding to socialMediaId",
                 "consumes": [
                     "application/json"
@@ -453,6 +541,24 @@ const docTemplate = `{
                     "Social Media"
                 ],
                 "summary": "Update Social Media",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "Social Media Id",
+                        "name": "socialMediaId",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "description": "update social media",
+                        "name": "SocialMedia",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/models.SocialMediaCreate"
+                        }
+                    }
+                ],
                 "responses": {
                     "200": {
                         "description": "OK",
@@ -463,6 +569,11 @@ const docTemplate = `{
                 }
             },
             "delete": {
+                "security": [
+                    {
+                        "Bearer": []
+                    }
+                ],
                 "description": "Delete Social Media corresponding to socialMediaId",
                 "consumes": [
                     "application/json"
@@ -506,11 +617,23 @@ const docTemplate = `{
                     "User"
                 ],
                 "summary": "Login user",
+                "operationId": "login-user",
+                "parameters": [
+                    {
+                        "description": "email",
+                        "name": "UserLogin",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/models.UserLogin"
+                        }
+                    }
+                ],
                 "responses": {
                     "200": {
-                        "description": "OK",
+                        "description": "token",
                         "schema": {
-                            "$ref": "#/definitions/models.User"
+                            "type": "string"
                         }
                     }
                 }
@@ -529,14 +652,15 @@ const docTemplate = `{
                     "User"
                 ],
                 "summary": "Register new user",
+                "operationId": "register-user",
                 "parameters": [
                     {
-                        "description": "create user",
-                        "name": "models.User",
+                        "description": "UserRegister",
+                        "name": "UserRegister",
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/models.User"
+                            "$ref": "#/definitions/models.UserRegister"
                         }
                     }
                 ],
@@ -581,7 +705,44 @@ const docTemplate = `{
                 }
             }
         },
+        "models.CommentCreate": {
+            "type": "object",
+            "properties": {
+                "message": {
+                    "type": "string"
+                }
+            }
+        },
         "models.Photo": {
+            "type": "object",
+            "properties": {
+                "caption": {
+                    "type": "string"
+                },
+                "created_at": {
+                    "type": "string"
+                },
+                "id": {
+                    "type": "integer"
+                },
+                "photo_url": {
+                    "type": "string"
+                },
+                "title": {
+                    "type": "string"
+                },
+                "updated_at": {
+                    "type": "string"
+                },
+                "user": {
+                    "$ref": "#/definitions/models.User"
+                },
+                "userID": {
+                    "type": "integer"
+                }
+            }
+        },
+        "models.PhotoCreate": {
             "type": "object",
             "properties": {
                 "caption": {
@@ -592,12 +753,6 @@ const docTemplate = `{
                 },
                 "title": {
                     "type": "string"
-                },
-                "user": {
-                    "$ref": "#/definitions/models.User"
-                },
-                "userID": {
-                    "type": "integer"
                 }
             }
         },
@@ -627,6 +782,17 @@ const docTemplate = `{
                 }
             }
         },
+        "models.SocialMediaCreate": {
+            "type": "object",
+            "properties": {
+                "name": {
+                    "type": "string"
+                },
+                "social_media_url": {
+                    "type": "string"
+                }
+            }
+        },
         "models.User": {
             "type": "object",
             "properties": {
@@ -636,10 +802,49 @@ const docTemplate = `{
                 "email": {
                     "type": "string"
                 },
+                "password": {
+                    "type": "string"
+                },
                 "username": {
                     "type": "string"
                 }
             }
+        },
+        "models.UserLogin": {
+            "type": "object",
+            "properties": {
+                "email": {
+                    "type": "string"
+                },
+                "password": {
+                    "type": "string"
+                }
+            }
+        },
+        "models.UserRegister": {
+            "type": "object",
+            "properties": {
+                "age": {
+                    "type": "integer"
+                },
+                "email": {
+                    "type": "string"
+                },
+                "password": {
+                    "type": "string"
+                },
+                "username": {
+                    "type": "string"
+                }
+            }
+        }
+    },
+    "securityDefinitions": {
+        "Bearer": {
+            "description": "Type \"Bearer\" eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2ODE0ODA2MDUsImlzcyI6Ik1ZLUdBUk0iLCJpZCI6NCwiRW1haWwiOiJva0Bvay5jb20ifQ.bPcX66MlkvCWypEXpLEadFToWYDoe8w3iq9YXp_JlHs",
+            "type": "apiKey",
+            "name": "Authorization",
+            "in": "header"
         }
     }
 }`

@@ -19,7 +19,31 @@ definitions:
       userID:
         type: integer
     type: object
+  models.CommentCreate:
+    properties:
+      message:
+        type: string
+    type: object
   models.Photo:
+    properties:
+      caption:
+        type: string
+      created_at:
+        type: string
+      id:
+        type: integer
+      photo_url:
+        type: string
+      title:
+        type: string
+      updated_at:
+        type: string
+      user:
+        $ref: '#/definitions/models.User'
+      userID:
+        type: integer
+    type: object
+  models.PhotoCreate:
     properties:
       caption:
         type: string
@@ -27,10 +51,6 @@ definitions:
         type: string
       title:
         type: string
-      user:
-        $ref: '#/definitions/models.User'
-      userID:
-        type: integer
     type: object
   models.SocialMedia:
     properties:
@@ -49,11 +69,38 @@ definitions:
       userID:
         type: integer
     type: object
+  models.SocialMediaCreate:
+    properties:
+      name:
+        type: string
+      social_media_url:
+        type: string
+    type: object
   models.User:
     properties:
       age:
         type: integer
       email:
+        type: string
+      password:
+        type: string
+      username:
+        type: string
+    type: object
+  models.UserLogin:
+    properties:
+      email:
+        type: string
+      password:
+        type: string
+    type: object
+  models.UserRegister:
+    properties:
+      age:
+        type: integer
+      email:
+        type: string
+      password:
         type: string
       username:
         type: string
@@ -89,6 +136,8 @@ paths:
           description: OK
           schema:
             $ref: '#/definitions/models.Comment'
+      security:
+      - Bearer: []
       summary: Get Comments
       tags:
       - Comment
@@ -104,10 +153,10 @@ paths:
         type: integer
       - description: create comment
         in: body
-        name: models.Comment
+        name: CommentCreate
         required: true
         schema:
-          $ref: '#/definitions/models.Comment'
+          $ref: '#/definitions/models.CommentCreate'
       produces:
       - application/json
       responses:
@@ -115,6 +164,8 @@ paths:
           description: OK
           schema:
             $ref: '#/definitions/models.Comment'
+      security:
+      - Bearer: []
       summary: Create Comment
       tags:
       - Comment
@@ -141,6 +192,8 @@ paths:
           description: OK
           schema:
             $ref: '#/definitions/models.Comment'
+      security:
+      - Bearer: []
       summary: Delete Comment
       tags:
       - Comment
@@ -166,6 +219,8 @@ paths:
           description: OK
           schema:
             $ref: '#/definitions/models.Comment'
+      security:
+      - Bearer: []
       summary: Get Comment
       tags:
       - Comment
@@ -184,6 +239,12 @@ paths:
         name: commentId
         required: true
         type: integer
+      - description: update comment
+        in: body
+        name: CommentUpdate
+        required: true
+        schema:
+          $ref: '#/definitions/models.CommentCreate'
       produces:
       - application/json
       responses:
@@ -191,6 +252,8 @@ paths:
           description: OK
           schema:
             $ref: '#/definitions/models.Comment'
+      security:
+      - Bearer: []
       summary: Update Comment
       tags:
       - Comment
@@ -206,6 +269,8 @@ paths:
           description: OK
           schema:
             $ref: '#/definitions/models.Photo'
+      security:
+      - Bearer: []
       summary: Get Photos
       tags:
       - Photo
@@ -216,10 +281,10 @@ paths:
       parameters:
       - description: create photo
         in: body
-        name: models.Photo
+        name: PhotoCreate
         required: true
         schema:
-          $ref: '#/definitions/models.Photo'
+          $ref: '#/definitions/models.PhotoCreate'
       produces:
       - application/json
       responses:
@@ -227,6 +292,8 @@ paths:
           description: OK
           schema:
             $ref: '#/definitions/models.Photo'
+      security:
+      - Bearer: []
       summary: Create Photo
       tags:
       - Photo
@@ -248,6 +315,8 @@ paths:
           description: OK
           schema:
             $ref: '#/definitions/models.Photo'
+      security:
+      - Bearer: []
       summary: Delete Photo
       tags:
       - Photo
@@ -268,6 +337,8 @@ paths:
           description: OK
           schema:
             $ref: '#/definitions/models.Photo'
+      security:
+      - Bearer: []
       summary: Get Photo
       tags:
       - Photo
@@ -281,6 +352,12 @@ paths:
         name: photoId
         required: true
         type: integer
+      - description: update photo
+        in: body
+        name: PhotoUpdate
+        required: true
+        schema:
+          $ref: '#/definitions/models.PhotoCreate'
       produces:
       - application/json
       responses:
@@ -288,6 +365,8 @@ paths:
           description: OK
           schema:
             $ref: '#/definitions/models.Photo'
+      security:
+      - Bearer: []
       summary: Update Photo
       tags:
       - Photo
@@ -303,6 +382,8 @@ paths:
           description: OK
           schema:
             $ref: '#/definitions/models.SocialMedia'
+      security:
+      - Bearer: []
       summary: Get Social Medias
       tags:
       - Social Media
@@ -313,10 +394,10 @@ paths:
       parameters:
       - description: create social media
         in: body
-        name: models.SocialMedia
+        name: SocialMediaCreate
         required: true
         schema:
-          $ref: '#/definitions/models.SocialMedia'
+          $ref: '#/definitions/models.SocialMediaCreate'
       produces:
       - application/json
       responses:
@@ -324,6 +405,8 @@ paths:
           description: OK
           schema:
             $ref: '#/definitions/models.SocialMedia'
+      security:
+      - Bearer: []
       summary: Create Social Media
       tags:
       - Social Media
@@ -345,6 +428,8 @@ paths:
           description: OK
           schema:
             $ref: '#/definitions/models.SocialMedia'
+      security:
+      - Bearer: []
       summary: Delete Social Media
       tags:
       - Social Media
@@ -365,6 +450,8 @@ paths:
           description: OK
           schema:
             $ref: '#/definitions/models.SocialMedia'
+      security:
+      - Bearer: []
       summary: Get Social Media
       tags:
       - Social Media
@@ -372,6 +459,18 @@ paths:
       consumes:
       - application/json
       description: Update Details of Social Media corresponding to socialMediaId
+      parameters:
+      - description: Social Media Id
+        in: path
+        name: socialMediaId
+        required: true
+        type: integer
+      - description: update social media
+        in: body
+        name: SocialMedia
+        required: true
+        schema:
+          $ref: '#/definitions/models.SocialMediaCreate'
       produces:
       - application/json
       responses:
@@ -379,6 +478,8 @@ paths:
           description: OK
           schema:
             $ref: '#/definitions/models.SocialMedia'
+      security:
+      - Bearer: []
       summary: Update Social Media
       tags:
       - Social Media
@@ -387,13 +488,21 @@ paths:
       consumes:
       - application/json
       description: Login user
+      operationId: login-user
+      parameters:
+      - description: email
+        in: body
+        name: UserLogin
+        required: true
+        schema:
+          $ref: '#/definitions/models.UserLogin'
       produces:
       - application/json
       responses:
         "200":
-          description: OK
+          description: token
           schema:
-            $ref: '#/definitions/models.User'
+            type: string
       summary: Login user
       tags:
       - User
@@ -402,13 +511,14 @@ paths:
       consumes:
       - application/json
       description: Register new user
+      operationId: register-user
       parameters:
-      - description: create user
+      - description: UserRegister
         in: body
-        name: models.User
+        name: UserRegister
         required: true
         schema:
-          $ref: '#/definitions/models.User'
+          $ref: '#/definitions/models.UserRegister'
       produces:
       - application/json
       responses:
@@ -419,4 +529,10 @@ paths:
       summary: Register new user
       tags:
       - User
+securityDefinitions:
+  Bearer:
+    description: Type "Bearer" eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2ODE0ODA2MDUsImlzcyI6Ik1ZLUdBUk0iLCJpZCI6NCwiRW1haWwiOiJva0Bvay5jb20ifQ.bPcX66MlkvCWypEXpLEadFToWYDoe8w3iq9YXp_JlHs
+    in: header
+    name: Authorization
+    type: apiKey
 swagger: "2.0"

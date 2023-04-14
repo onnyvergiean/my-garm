@@ -11,13 +11,15 @@ import (
 
 var appJSON = "application/json"
 
+
 // UserRegister godoc
 // @Summary Register new user
 // @Description Register new user
+// @ID register-user
 // @Tags User
 // @Accept  json
 // @Produce  json
-// @Param models.User body models.User true "create user"
+// @Param UserRegister body models.UserRegister true "UserRegister"
 // @Success 200 {object} models.User
 // @Router /users/register [post]
 func UserRegister(c *gin.Context){
@@ -48,9 +50,11 @@ func UserRegister(c *gin.Context){
 // @Summary Login user
 // @Description Login user
 // @Tags User
-// @Accept  json
-// @Produce  json
-// @Success 200 {object} models.User
+// @ID login-user
+// @Accept json
+// @Produce json
+// @Param UserLogin body models.UserLogin true "email"
+// @Success 200 {object} string "token"
 // @Router /users/login [post]
 func UserLogin(c *gin.Context){
 	db := database.GetDB()

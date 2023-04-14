@@ -16,11 +16,12 @@ import (
 // CreateComment godoc
 // @Summary Create Comment
 // @Description Create New Comment Based on Photo ID
+// @Security Bearer
 // @Tags Comment
 // @Accept  json
 // @Produce  json
 // @Param photoId path int true "photo id"
-// @Param models.Comment body models.Comment true "create comment"
+// @Param CommentCreate body models.CommentCreate true "create comment"
 // @Success 200 {object} models.Comment
 // @Router /comments/{photoId} [post]
 func CreateComment(c *gin.Context) {
@@ -81,6 +82,7 @@ func CreateComment(c *gin.Context) {
 // GetComment godoc
 // @Summary Get Comment
 // @Description Get Details of Comment by corresponding ID
+// @Security Bearer
 // @Tags Comment
 // @Accept  json
 // @Produce  json
@@ -112,6 +114,7 @@ func GetComment(c *gin.Context) {
 // GetComments godoc
 // @Summary Get Comments
 // @Description Get Details of Comments by corresponding Photo ID
+// @Security Bearer
 // @Tags Comment
 // @Accept  json
 // @Produce  json
@@ -142,11 +145,13 @@ func GetComments(c *gin.Context) {
 // UpdateComment godoc
 // @Summary Update Comment
 // @Description Update Comment by corresponding ID
+// @Security Bearer
 // @Tags Comment
 // @Accept  json
 // @Produce  json
 // @Param photoId path int true "photo id"
 // @Param commentId path int true "comment id"
+// @Param CommentUpdate body models.CommentCreate true "update comment"
 // @Success 200 {object} models.Comment
 // @Router /comments/{photoId}/{commentId} [put]
 func UpdateComment(c *gin.Context) {
@@ -204,6 +209,7 @@ func UpdateComment(c *gin.Context) {
 // DeleteComment godoc
 // @Summary Delete Comment
 // @Description Delete Comment by corresponding ID
+// @Security Bearer
 // @Tags Comment
 // @Accept  json
 // @Produce  json

@@ -16,10 +16,11 @@ import (
 // CreatePhoto godoc
 // @Summary Create Photo
 // @Description Create New Photo
+// @Security Bearer
 // @Tags Photo
 // @Accept  json
 // @Produce  json
-// @Param models.Photo body models.Photo true "create photo"
+// @Param PhotoCreate body models.PhotoCreate true "create photo"
 // @Success 200 {object} models.Photo
 // @Router /photos [post]
 func CreatePhoto(c *gin.Context) {
@@ -60,6 +61,7 @@ func CreatePhoto(c *gin.Context) {
 // GetPhoto godoc
 // @Summary Get Photo
 // @Description Get Details of Photo by corresponding ID
+// @Security Bearer
 // @Tags Photo
 // @Accept  json
 // @Produce  json
@@ -86,6 +88,7 @@ func GetPhoto(c *gin.Context) {
 // GetPhotos godoc
 // @Summary Get Photos
 // @Description Get Details of All Photos
+// @Security Bearer
 // @Tags Photo
 // @Accept  json
 // @Produce  json
@@ -110,10 +113,12 @@ func GetPhotos(c *gin.Context) {
 // UpdatePhoto godoc
 // @Summary Update Photo
 // @Description Update Details of Photo by corresponding ID
+// @Security Bearer
 // @Tags Photo
 // @Accept  json
 // @Produce  json
 // @Param photoId path int true "Photo ID"
+// @Param PhotoUpdate body models.PhotoCreate true "update photo"
 // @Success 200 {object} models.Photo
 // @Router /photos/{photoId} [put]
 func UpdatePhoto(c *gin.Context){
@@ -149,6 +154,7 @@ func UpdatePhoto(c *gin.Context){
 // DeletePhoto godoc
 // @Summary Delete Photo
 // @Description Delete Photo by corresponding ID
+// @Security Bearer
 // @Tags Photo
 // @Accept  json
 // @Produce  json

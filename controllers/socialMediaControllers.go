@@ -17,9 +17,10 @@ import (
 // @Summary Create Social Media
 // @Description Create New Social Media
 // @Tags Social Media
+// @Security Bearer
 // @Accept  json
 // @Produce  json
-// @Param models.SocialMedia body models.SocialMedia true "create social media"
+// @Param SocialMediaCreate body models.SocialMediaCreate true "create social media"
 // @Success 200 {object} models.SocialMedia
 // @Router /social-media [post]
 func CreateSocialMedia(c *gin.Context){
@@ -30,7 +31,6 @@ func CreateSocialMedia(c *gin.Context){
 	SocialMedia := models.SocialMedia{}
 	userID := userData["id"].(float64)
 	user := models.User{}
-
 
 	err := db.First(&user, "id = ?" , userID).Error
 
@@ -63,6 +63,7 @@ func CreateSocialMedia(c *gin.Context){
 // @Summary Get Social Media
 // @Description Get Details of Social Media corresponding to socialMediaId
 // @Tags Social Media
+// @Security Bearer
 // @Accept  json
 // @Produce  json
 // @Param socialMediaId path int true "Social Media Id"
@@ -88,6 +89,7 @@ func GetSocialMedia(c *gin.Context){
 // GetSocialMedias godoc
 // @Summary Get Social Medias
 // @Description Get Details of all Social Medias
+// @Security Bearer
 // @Tags Social Media
 // @Accept  json
 // @Produce  json
@@ -111,8 +113,11 @@ func GetSocialMedias(c *gin.Context){
 // @Summary Update Social Media
 // @Description Update Details of Social Media corresponding to socialMediaId
 // @Tags Social Media
+// @Security Bearer
 // @Accept  json
 // @Produce  json
+// @Param socialMediaId path int true "Social Media Id"
+// @Param SocialMedia body models.SocialMediaCreate true "update social media"
 // @Success 200 {object} models.SocialMedia
 // @Router /social-media/{socialMediaId} [put]
 func UpdateSocialMedia(c *gin.Context){
@@ -147,6 +152,7 @@ func UpdateSocialMedia(c *gin.Context){
 // @Summary Delete Social Media
 // @Description Delete Social Media corresponding to socialMediaId
 // @Tags Social Media
+// @Security Bearer
 // @Accept  json
 // @Produce  json
 // @Param socialMediaId path int true "Social Media Id"
