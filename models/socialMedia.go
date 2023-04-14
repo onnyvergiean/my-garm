@@ -11,7 +11,12 @@ type SocialMedia struct {
 	Name string `gorm:"not null" json:"name" form:"name" valid:"required~Name is required"`
 	SocialMediaURL string `gorm:"not null" json:"social_media_url" form:"social_media_url" valid:"required~Social Media URL is required"`
 	UserID uint
-	User *User
+	User *User `gorm:"constraint:OnUpdate:CASCADE,OnDelete:CASCADE"`
+}
+
+type SocialMediaCreate struct {
+	Name string `json:"name"`
+	SocialMediaURL string `json:"social_media_url"`
 }
 
 func (s *SocialMedia) BeforeCreate(tx *gorm.DB) (err error) {

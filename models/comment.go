@@ -11,10 +11,14 @@ type Comment struct {
 	Message string `gorm:"not null" json:"message" form:"message" valid:"required~Message is required"`
 	UserID uint
 	PhotoID uint
-	User *User
-	Photo *Photo
+	User *User	`gorm:"constraint:OnUpdate:CASCADE,OnDelete:CASCADE"`
+	Photo *Photo `gorm:"constraint:OnUpdate:CASCADE,OnDelete:CASCADE"`
 }
 
+
+type CommentCreate struct {
+	Message string `json:"message"`
+}
 
 func (c *Comment) BeforeCreate(tx *gorm.DB) (err error) {
 	_, errCreate := govalidator.ValidateStruct(c)
