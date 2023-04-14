@@ -3,7 +3,9 @@ package router
 import (
 	"my-garm/controllers"
 	"my-garm/middlewares"
+	"time"
 
+	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
 	swaggerFiles "github.com/swaggo/files"
 	ginSwagger "github.com/swaggo/gin-swagger"
@@ -24,12 +26,20 @@ import (
 // @license.url http://www.apache.org/licenses/LICENSE-2.0.html
 // @version 1.0.0
 // @host https://my-garm-production-b7b2.up.railway.app/
-// @Access-Control-Allow-Origin: *
 // @BasePath /
 func StartApp() *gin.Engine {
 	r := gin.Default()
 
 	r.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
+	r.Use(cors.New(cors.Config{
+		AllowOrigins:     []string{"https://my-garm-production-b7b2.up.railway.app/"},
+		AllowMethods:     []string{"PUT", "PATCH","POST", "GET", "DELETE"},
+		AllowHeaders:     []string{"Origin"},
+		ExposeHeaders:    []string{"Content-Length"},
+		AllowCredentials: true,
+		MaxAge: 12 * time.Hour,
+	}))
+
 	userRouter := r.Group("/users")
 	{
 		userRouter.POST("/register", controllers.UserRegister)
