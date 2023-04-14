@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"log"
 	"my-garm/models"
+	"os"
 
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
@@ -12,11 +13,11 @@ import (
 
 
 var (
-	host    = "localhost"
-	user	= "postgres"
-	password = "1234"
-	port    = "5432"
-	dbname =  "my-garm"
+	host    = os.Getenv("PGHOST")
+	user	= os.Getenv("PGUSER")
+	password = os.Getenv("PGPASSWORD")
+	port    = os.Getenv("PGPORT")
+	dbname =  os.Getenv("PGDATABASE")
 	db *gorm.DB
 	err error
 )
