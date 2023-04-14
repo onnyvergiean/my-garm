@@ -4,10 +4,13 @@ import (
 	"errors"
 	"my-garm/helpers"
 
+	_ "my-garm/docs"
+
 	"github.com/asaskevich/govalidator"
 	"gorm.io/gorm"
 )
 
+// User represents the model for users
 type User struct {
 	GormModel `json:"-"`
 	Username string `gorm:"not null;uniqueIndex" json:"username" form:"username" valid:"required~Username is required"`

@@ -5,12 +5,25 @@ import (
 	"my-garm/middlewares"
 
 	"github.com/gin-gonic/gin"
+	swaggerFiles "github.com/swaggo/files"
+	ginSwagger "github.com/swaggo/gin-swagger"
 )
 
-
+// @title My-Garm API Documentation
+// @description This is a sample server for a photo sharing app.
+// @termsOfService http://swagger.io/terms/
+// @contact.name API Support
+// @contact.url http://www.swagger.io/support
+// @contact.email
+// @license.name Apache 2.0
+// @license.url http://www.apache.org/licenses/LICENSE-2.0.html
+// @version 1.0.0
+// @host localhost:8080
+// @BasePath /
 func StartApp() *gin.Engine {
 	r := gin.Default()
 
+	r.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
 	userRouter := r.Group("/users")
 	{
 		userRouter.POST("/register", controllers.UserRegister)
@@ -39,7 +52,7 @@ func StartApp() *gin.Engine {
 	socialMediaRouter := r.Group("/social-media")
 	{
 		socialMediaRouter.Use(middlewares.Authentication())
-		socialMediaRouter.POST("/",controllers.CreateSocialmedia)
+		socialMediaRouter.POST("/",controllers.CreateSocialMedia)
 		socialMediaRouter.GET("/",controllers.GetSocialMedias)
 		socialMediaRouter.GET("/:socialMediaId",controllers.GetSocialMedia)
 		socialMediaRouter.PUT("/:socialMediaId",middlewares.SocialMediaAuthorization(),controllers.UpdateSocialMedia)
@@ -47,6 +60,7 @@ func StartApp() *gin.Engine {
 		
 	}
 
+	
 	
 	return r
 }

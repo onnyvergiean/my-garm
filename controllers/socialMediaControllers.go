@@ -13,8 +13,16 @@ import (
 	"gorm.io/gorm"
 )
 
-
-func CreateSocialmedia(c *gin.Context){
+// CreateSocialMedia godoc
+// @Summary Create Social Media
+// @Description Create New Social Media
+// @Tags Social Media
+// @Accept  json
+// @Produce  json
+// @Param models.SocialMedia body models.SocialMedia true "create social media"
+// @Success 200 {object} models.SocialMedia
+// @Router /social-media [post]
+func CreateSocialMedia(c *gin.Context){
 	db := database.GetDB()
 	userData := c.MustGet("userData").(jwt.MapClaims)
 	contentType := helpers.GetContentType(c)
@@ -50,6 +58,16 @@ func CreateSocialmedia(c *gin.Context){
 	c.JSON(http.StatusCreated, SocialMedia)
 }
 
+
+// GetSocialMedia godoc
+// @Summary Get Social Media
+// @Description Get Details of Social Media corresponding to socialMediaId
+// @Tags Social Media
+// @Accept  json
+// @Produce  json
+// @Param socialMediaId path int true "Social Media Id"
+// @Success 200 {object} models.SocialMedia
+// @Router /social-media/{socialMediaId} [get]
 func GetSocialMedia(c *gin.Context){
 	db := database.GetDB()
 	SocialMedia := models.SocialMedia{}
@@ -67,6 +85,14 @@ func GetSocialMedia(c *gin.Context){
 	c.JSON(http.StatusOK, SocialMedia)
 }
 
+// GetSocialMedias godoc
+// @Summary Get Social Medias
+// @Description Get Details of all Social Medias
+// @Tags Social Media
+// @Accept  json
+// @Produce  json
+// @Success 200 {object} models.SocialMedia
+// @Router /social-media [get]
 func GetSocialMedias(c *gin.Context){
 	db := database.GetDB()
 	SocialMedias := []models.SocialMedia{}
@@ -81,6 +107,14 @@ func GetSocialMedias(c *gin.Context){
 	c.JSON(http.StatusOK, SocialMedias)
 }
 
+// UpdateSocialMedia godoc
+// @Summary Update Social Media
+// @Description Update Details of Social Media corresponding to socialMediaId
+// @Tags Social Media
+// @Accept  json
+// @Produce  json
+// @Success 200 {object} models.SocialMedia
+// @Router /social-media/{socialMediaId} [put]
 func UpdateSocialMedia(c *gin.Context){
 	db := database.GetDB()
 	contentType := helpers.GetContentType(c)
@@ -109,6 +143,15 @@ func UpdateSocialMedia(c *gin.Context){
 	c.JSON(http.StatusOK,  gin.H{"message": "Social Media Updated", "Name": SocialMedia.Name, "URL": SocialMedia.SocialMediaURL})
 }
 
+// DeleteSocialMedia godoc
+// @Summary Delete Social Media
+// @Description Delete Social Media corresponding to socialMediaId
+// @Tags Social Media
+// @Accept  json
+// @Produce  json
+// @Param socialMediaId path int true "Social Media Id"
+// @Success 200 {object} models.SocialMedia
+// @Router /social-media/{socialMediaId} [delete]
 func DeleteSocialMedia(c *gin.Context){
 	db := database.GetDB()
 	SocialMedia := models.SocialMedia{}
